@@ -2,7 +2,9 @@ package com.example.gestion_trajets.service.etape;
 
 
 import com.example.gestion_trajets.entities.Etape;
+import com.example.gestion_trajets.exception.ResourceNotFoundException;
 import com.example.gestion_trajets.repositories.EtapeRepo;
+import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -50,8 +52,13 @@ public class EtapeServiceImpl implements EtapeService {
     }
 
     @Override
-    public void deleteEtape(Etape etape) {
+    public void deleteEtape(Integer id) {
 
+    }
+
+    @Override
+    public @Nullable Etape getEtapeByName(String nomEtape) {
+        return this.etapeRepo.findByName(nomEtape).orElseThrow(()->new ResourceNotFoundException("L'etape n'existe pas"));
     }
 
 

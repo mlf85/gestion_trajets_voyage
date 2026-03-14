@@ -1,6 +1,7 @@
 package com.example.gestion_trajets.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDateTime;
@@ -13,7 +14,7 @@ public class Etape {
 @Id
 @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
-    @NotNull(message = "Ce champ ne doit pas être null ")
+    @NotNull
     @Size(min = 3, max = 6, message = "Min 3 et Max 6")
     private String nomEtape;
     private String ville;

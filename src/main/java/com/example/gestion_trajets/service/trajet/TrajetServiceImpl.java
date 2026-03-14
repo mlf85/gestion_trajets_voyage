@@ -1,6 +1,7 @@
 package com.example.gestion_trajets.service.trajet;
 
 import com.example.gestion_trajets.entities.Trajet;
+import com.example.gestion_trajets.exception.ResourceNotFoundException;
 import com.example.gestion_trajets.repositories.TrajetRepo;
 import org.springframework.stereotype.Service;
 

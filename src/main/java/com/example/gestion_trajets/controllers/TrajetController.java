@@ -29,7 +29,7 @@ import java.util.List;
         }
 
         @GetMapping(path = "/get_by_id/{id}")
-        public ResponseEntity<Trajet> getCategory(@PathVariable Integer id){
+        public ResponseEntity<Trajet> getTrajet(@PathVariable Integer id){
             return ResponseEntity.status(200).body(this.trajetService.getTrajetById(id));
         }
 
