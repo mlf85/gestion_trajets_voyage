@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "etapes")
@@ -24,14 +25,14 @@ public class Etape {
     private Integer ordre;
     private String description;
     @Temporal(TemporalType.DATE)
-    private LocalDateTime dateCreation;
+    private Date dateCreation;
     @Temporal(TemporalType.DATE)
-    private LocalDateTime dateModification;
+    private Date dateModification;
     @ManyToOne
     private Trajet trajet;
 
 
-    public Etape(Integer id, String nomEtape, String ville, String pays, LocalDateTime heureDepartEtape, LocalDateTime heureArriveEtape, Integer dureeArret, Enum typeEtape, Integer ordre, String description, LocalDateTime dateCreation) {
+    public Etape(Integer id, String nomEtape, String ville, String pays, LocalDateTime heureDepartEtape, LocalDateTime heureArriveEtape, Integer dureeArret, Enum typeEtape, Integer ordre, String description, Date dateCreation, Date dateModification, Trajet trajet) {
         this.id = id;
         this.nomEtape = nomEtape;
         this.ville = ville;
@@ -43,6 +44,8 @@ public class Etape {
         this.ordre = ordre;
         this.description = description;
         this.dateCreation = dateCreation;
+        this.dateModification = dateModification;
+        this.trajet = trajet;
     }
 
     public Etape() {}
@@ -127,11 +130,23 @@ public class Etape {
         this.description = description;
     }
 
-    public LocalDateTime getDateCreation() {
+    public Date getDateCreation() {
         return dateCreation;
     }
 
-    public void setDateCreation(LocalDateTime dateCreation) {
+    public void setDateCreation(Date dateCreation) {
         this.dateCreation = dateCreation;
+    }
+    public Date getDateModification() {
+        return dateModification;
+    }
+    public void setDateModification(Date dateModification) {
+        this.dateModification = dateModification;
+    }
+    public Trajet getTrajet() {
+        return trajet;
+    }
+    public void setTrajet(Trajet trajet) {
+        this.trajet = trajet;
     }
 }

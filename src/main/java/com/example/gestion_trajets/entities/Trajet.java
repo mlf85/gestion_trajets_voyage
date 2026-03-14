@@ -2,9 +2,13 @@ package com.example.gestion_trajets.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -15,13 +19,20 @@ public class Trajet {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer idTrajet;
+   @NotBlank
     private String villeDepart;
+   @NotBlank
     private String villeArrivee;
+   @NotBlank
     private String paysDepart;
+   @NotBlank
     private String paysArrivee;
+   @NotNull
     private LocalDateTime dateHeureDepart;
+   @NotNull
     private LocalDateTime dateHeureArrivee;
     private Integer duree;
+    @Positive
     private Double distance;
     private Enum typeTransport;
     private String numVol_bus;
@@ -30,9 +41,9 @@ public class Trajet {
     private Enum statut;
     private String description;
     @Temporal(TemporalType.DATE)
-    private LocalDateTime dateCreation;
+    private Date dateCreation;
     @Temporal(TemporalType.DATE)
-    private LocalDateTime dateModification;
+    private Date dateModification;
     @ManyToOne
     private Integer offre_id;
     @OneToMany(mappedBy = "trajet")
@@ -40,7 +51,7 @@ public class Trajet {
     private List<Etape> etapes= new ArrayList<>();
 
 
-    public Trajet(Integer idTrajet, String villeDepart, String villeArrivee, String paysDepart, String paysArrivee, LocalDateTime dateHeureDepart, LocalDateTime dateHeureArrivee, Integer duree, Double distance, Enum typeTransport, String numVol_bus, String nomCompagnie, Integer ordreTrajet, Enum statut, String description, LocalDateTime dateCreation, LocalDateTime dateModification, Integer offre_id, List<Etape> etapes) {
+    public Trajet(Integer idTrajet, String villeDepart, String villeArrivee, String paysDepart, String paysArrivee, LocalDateTime dateHeureDepart, LocalDateTime dateHeureArrivee, Integer duree, Double distance, Enum typeTransport, String numVol_bus, String nomCompagnie, Integer ordreTrajet, Enum statut, String description, Date dateCreation, Date dateModification, Integer offre_id, List<Etape> etapes) {
         this.idTrajet = idTrajet;
         this.villeDepart = villeDepart;
         this.villeArrivee = villeArrivee;
@@ -185,19 +196,19 @@ public class Trajet {
         this.description = description;
     }
 
-    public LocalDateTime getDateCreation() {
+    public Date getDateCreation() {
         return dateCreation;
     }
 
-    public void setDateCreation(LocalDateTime dateCreation) {
+    public void setDateCreation(Date dateCreation) {
         this.dateCreation = dateCreation;
     }
 
-    public LocalDateTime getDateModification() {
+    public Date getDateModification() {
         return dateModification;
     }
 
-    public void setDateModification(LocalDateTime dateModification) {
+    public void setDateModification(Date dateModification) {
         this.dateModification = dateModification;
     }
 
