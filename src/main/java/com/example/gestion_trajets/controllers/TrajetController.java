@@ -1,5 +1,6 @@
 package com.example.gestion_trajets.controllers;
 
+import com.example.gestion_trajets.DTO.TrajetReq;
 import jakarta.validation.Valid;
 import com.example.gestion_trajets.entities.Trajet;
 import com.example.gestion_trajets.service.trajet.TrajetService;
@@ -18,8 +19,8 @@ import java.util.List;
         }
 
         @PostMapping(path = "/create")
-        public ResponseEntity<String> createTrajet(@RequestBody @Valid Trajet trajet){
-            this.trajetService.createTrajet(trajet);
+        public ResponseEntity<String> createTrajet(@RequestBody @Valid TrajetReq trajetReq){
+            this.trajetService.createTrajet(trajetReq);
             return ResponseEntity.status(201).body("Trajet created !");
         }
 

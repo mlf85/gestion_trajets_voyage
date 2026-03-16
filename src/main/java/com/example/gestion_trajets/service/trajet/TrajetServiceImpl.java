@@ -1,11 +1,12 @@
 package com.example.gestion_trajets.service.trajet;
 
+import com.example.gestion_trajets.DTO.TrajetReq;
 import com.example.gestion_trajets.entities.Trajet;
+import com.example.gestion_trajets.exception.ResourceExistException;
 import com.example.gestion_trajets.exception.ResourceNotFoundException;
 import com.example.gestion_trajets.repositories.TrajetRepo;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -22,8 +23,13 @@ public class TrajetServiceImpl implements TrajetService{
 
 
     @Override
-    public void createTrajet(Trajet trajet) {
-        trajet.setIdTrajet(null);
+    public void createTrajet(TrajetReq trajetReq) {
+        Optional<Trajet> customerFound = this.trajetRepo.fetchTrajetByName(trajetReq.getNom());
+        if(customerFound.isPresent())
+            throw new ResourceExistException("Le client existe déjà !");
+
+
+        Trajet trajet = new Trajet(trajetReq.getNom(), customerReqDTO.getLastName(), customerReqDTO.getEmail());
         trajet.setDateCreation(new Date());
         trajet.setDateModification(new Date());
        this.trajetRepo.save(trajet);
