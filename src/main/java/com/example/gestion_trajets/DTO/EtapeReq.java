@@ -1,6 +1,8 @@
 package com.example.gestion_trajets.DTO;
 
+import com.example.gestion_trajets.enums.TypeEtape;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 
@@ -11,11 +13,11 @@ public class EtapeReq {
     @NotEmpty(message = "name is required")
     private String pays;
     private Integer dureeArret;
-    @NotEmpty(message = "name is required")
-    private Enum typeEtape;
+    @NotNull(message = "Le type d'étape est obligatoire")
+    private TypeEtape typeEtape;
     private Integer ordre;
 
-    public EtapeReq(Enum typeEtape, Integer dureeArret, String pays, String ville, String nomEtape, Integer ordre, Date dateCreation, Date dateModification) {
+    public EtapeReq(TypeEtape typeEtape, Integer dureeArret, String pays, String ville, String nomEtape, Integer ordre, Date dateCreation, Date dateModification) {
         this.typeEtape = typeEtape;
         this.dureeArret = dureeArret;
         this.pays = pays;
@@ -58,11 +60,11 @@ public class EtapeReq {
         this.dureeArret = dureeArret;
     }
 
-    public Enum getTypeEtape() {
+    public TypeEtape getTypeEtape() {
         return typeEtape;
     }
 
-    public void setTypeEtape(Enum typeEtape) {
+    public void setTypeEtape(TypeEtape typeEtape) {
         this.typeEtape = typeEtape;
     }
 

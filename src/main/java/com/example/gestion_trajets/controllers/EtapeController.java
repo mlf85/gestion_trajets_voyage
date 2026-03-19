@@ -1,5 +1,6 @@
 package com.example.gestion_trajets.controllers;
 
+import com.example.gestion_trajets.DTO.EtapeResp;
 import com.example.gestion_trajets.entities.Etape;
 import com.example.gestion_trajets.service.etape.EtapeService;
 import jakarta.validation.Valid;
@@ -10,7 +11,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(path = "api/v1/trajets")
+@RequestMapping(path = "api/v1/etapes")
 public class EtapeController {
 
         private final EtapeService etapeService;
@@ -30,24 +31,24 @@ public class EtapeController {
         return ResponseEntity.status(200).body(this.etapeService.getEtapes());
     }
 
-    @GetMapping(path = "/get_by_id/{id}")
+    @GetMapping("/get_by_id/{id}")
     public ResponseEntity<Etape> getEtape(@PathVariable Integer id){
         return ResponseEntity.status(200).body(this.etapeService.getEtapeById(id));
     }
 
-    @GetMapping(path = "/get_by_name/{name}")
-    public ResponseEntity<Etape> getEtapeByName(@PathVariable String nomEtape){
-        return ResponseEntity.status(200).body(this.etapeService.getEtapeByName(nomEtape));
+    @GetMapping("/get_by_name/{nomEtape}")
+    public ResponseEntity<Etape> getEtapeByNomEtape(@RequestParam @PathVariable String nomEtape){
+        return ResponseEntity.status(200).body(this.etapeService.getEtapeByNomEtape(nomEtape));
     }
 
-    @PutMapping(path = "/update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<String> updateEtape(@RequestBody Etape etape, @PathVariable Integer id){
         this.etapeService.updateEtape(id, etape);
         return ResponseEntity.status(202).body("Updated successfully !");
 
     }
 
-    @DeleteMapping(path = "/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deletedSuccessfully(@PathVariable Integer id){
         this.etapeService.deleteEtape(id);
         return ResponseEntity.status(202).body("Deleted successfully");

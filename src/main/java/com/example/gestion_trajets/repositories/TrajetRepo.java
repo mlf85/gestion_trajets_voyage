@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 @Repository
 public interface TrajetRepo extends JpaRepository<Trajet,Integer> {
-    Optional<Trajet> findByName(String nom);
-    @Query("Select c from Trajet c where c.trajet=:trajet")
-    Optional<Trajet> fetchTrajetByName(@Param("nom") String nom);
+    Optional<Trajet> findById(@Param("id") Integer id);
+Optional<Trajet> findByOffre_offreId(Integer offre_id);
+
 }

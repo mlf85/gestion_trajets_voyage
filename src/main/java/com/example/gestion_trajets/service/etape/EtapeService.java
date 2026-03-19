@@ -1,5 +1,6 @@
 package com.example.gestion_trajets.service.etape;
 
+import com.example.gestion_trajets.DTO.EtapeResp;
 import com.example.gestion_trajets.entities.Etape;
 import com.example.gestion_trajets.entities.Trajet;
 import org.jspecify.annotations.Nullable;
@@ -12,5 +13,5 @@ public interface EtapeService {
     Etape getEtapeById(Integer id);
     void updateEtape(Integer id, Etape etape);
     void deleteEtape(Integer id);
-    @Nullable Etape getEtapeByName(String nomEtape);
+    @Nullable Etape getEtapeByNomEtape(String nomEtape);
 }

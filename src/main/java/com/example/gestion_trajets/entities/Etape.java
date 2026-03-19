@@ -1,5 +1,6 @@
 package com.example.gestion_trajets.entities;
 
+import com.example.gestion_trajets.enums.TypeEtape;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import org.antlr.v4.runtime.misc.NotNull;
@@ -7,33 +8,50 @@ import org.antlr.v4.runtime.misc.NotNull;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+
+
 @Entity
 @Table(name = "etapes")
 public class Etape {
 
-@Id
-@GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @NotNull
     @Size(min = 3, max = 6, message = "Min 3 et Max 6")
     private String nomEtape;
+
     private String ville;
     private String pays;
+
     private LocalDateTime heureDepartEtape;
     private LocalDateTime heureArriveEtape;
+
     private Integer dureeArret;
-    private Enum typeEtape;
+
+    @Enumerated(EnumType.STRING)
+    private TypeEtape typeEtape;
+
     private Integer ordre;
     private String description;
+
     @Temporal(TemporalType.DATE)
     private Date dateCreation;
+
     @Temporal(TemporalType.DATE)
     private Date dateModification;
+
     @ManyToOne
+    @JoinColumn(name = "trajet_id")
     private Trajet trajet;
 
+    public Etape() {}
 
-    public Etape(Integer id, String nomEtape, String ville, String pays, LocalDateTime heureDepartEtape, LocalDateTime heureArriveEtape, Integer dureeArret, Enum typeEtape, Integer ordre, String description, Date dateCreation, Date dateModification, Trajet trajet) {
+    public Etape(Integer id, String nomEtape, String ville, String pays,
+                 LocalDateTime heureDepartEtape, LocalDateTime heureArriveEtape,
+                 Integer dureeArret, TypeEtape typeEtape, Integer ordre,
+                 String description, Date dateCreation, Date dateModification, Trajet trajet) {
         this.id = id;
         this.nomEtape = nomEtape;
         this.ville = ville;
@@ -48,8 +66,6 @@ public class Etape {
         this.dateModification = dateModification;
         this.trajet = trajet;
     }
-
-    public Etape() {}
 
     public Integer getId() {
         return id;
@@ -107,11 +123,11 @@ public class Etape {
         this.dureeArret = dureeArret;
     }
 
-    public Enum getTypeEtape() {
+    public TypeEtape getTypeEtape() {
         return typeEtape;
     }
 
-    public void setTypeEtape(Enum typeEtape) {
+    public void setTypeEtape(TypeEtape typeEtape) {
         this.typeEtape = typeEtape;
     }
 

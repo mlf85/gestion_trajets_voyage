@@ -1,30 +1,38 @@
 package com.example.gestion_trajets.DTO;
 
+import com.example.gestion_trajets.enums.TypeTransport;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class TrajetReq {
-    @NotEmpty(message = "name is required")
+    private String nomOffre;
+    @Valid
+    private  OffreReq offreReq;
+    private Integer idTrajet;
+    private Integer offreId;
     private String nom;
-    @NotEmpty(message = "name is required")
     private String villeDepart;
-    @NotEmpty(message = "name is required")
+    @NotEmpty
     private String villeArrivee;
-    @NotEmpty(message = "name is required")
     private String paysDepart;
-    @NotEmpty(message = "name is required")
     private String paysArrivee;
     private Integer duree;
     private double distance;
-    @NotEmpty(message = "name is required")
-    private Enum typeTransport;
+    private LocalDateTime dateHeureDepart;
+    private LocalDateTime dateHeureArrivee;
+    @NotNull(message = "Le type de transport est obligatoire")
+    private TypeTransport typeTransport;
     private String numVol_bus;
     @NotEmpty(message = "name is required")
     private String nomCompagnie;
     private Integer ordreTrajet;
 
-    public TrajetReq(String nom, String villeDepart, String villeArrivee, String paysDepart, String paysArrivee, Integer duree, double distance, Enum typeTransport, String numVol_bus, String nomCompagnie, Integer ordreTrajet, Date dateCreation, Date dateModification) {
+    public TrajetReq(String nom, String villeDepart, String villeArrivee, String paysDepart, String paysArrivee, Integer duree, double distance, LocalDate dateHeureDepart, LocalDate dateHeureArrivee, TypeTransport typeTransport, String numVol_bus, String nomCompagnie, Integer ordreTrajet, Date dateCreation, Date dateModification, OffreReq offreReq) {
         this.nom = nom;
         this.villeDepart = villeDepart;
         this.villeArrivee = villeArrivee;
@@ -36,9 +44,16 @@ public class TrajetReq {
         this.numVol_bus = numVol_bus;
         this.nomCompagnie = nomCompagnie;
         this.ordreTrajet = ordreTrajet;
+        this.offreReq = offreReq;
+        this.dateHeureArrivee = dateHeureArrivee.atStartOfDay();
+        this.dateHeureDepart = dateHeureDepart.atStartOfDay();
 }
 
     public TrajetReq() {
+    }
+
+    public TrajetReq(OffreReq offreReq) {
+        this.offreReq = offreReq;
     }
 
     public String getVilleDepart() {
@@ -89,11 +104,11 @@ public class TrajetReq {
         this.distance = distance;
     }
 
-    public Enum getTypeTransport() {
+    public TypeTransport getTypeTransport() {
         return typeTransport;
     }
 
-    public void setTypeTransport(Enum typeTransport) {
+    public void setTypeTransport(TypeTransport typeTransport) {
         this.typeTransport = typeTransport;
     }
 
@@ -133,4 +148,40 @@ public class TrajetReq {
     public String getNom() {
         return nom;
     }
+
+    public OffreReq getOffreReq() {
+        return offreReq;
+    }
+
+    public void setOffreReq(OffreReq offreReq) {
+        this.offreReq = offreReq;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public LocalDateTime getDateHeureDepart() {
+        return dateHeureDepart;
+    }
+
+    public void setDateHeureDepart(LocalDateTime dateHeureDepart) {
+        this.dateHeureDepart = dateHeureDepart;
+    }
+
+    public LocalDateTime getDateHeureArrivee() {
+        return dateHeureArrivee;
+    }
+
+    public void setDateHeureArrivee(LocalDateTime dateHeureArrivee) {
+        this.dateHeureArrivee = dateHeureArrivee;
+    }
+
+    public Integer getOffreId() {
+        return offreId;
+    }
+    public void setOffreId(Integer offreId) { this.offreId = offreId; }
+
+    public Integer getIdTrajet() {
+    return idTrajet;}
 }

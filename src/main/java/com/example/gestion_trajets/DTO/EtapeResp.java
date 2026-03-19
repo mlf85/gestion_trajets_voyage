@@ -1,6 +1,7 @@
 package com.example.gestion_trajets.DTO;
 
 
+import com.example.gestion_trajets.enums.TypeEtape;
 
 public class EtapeResp {
     private Integer id;
@@ -8,10 +9,10 @@ public class EtapeResp {
     private String ville;
     private String pays;
     private Integer dureeArret;
-    private Enum typeEtape;
+    private TypeEtape typeEtape;
     private Integer ordre;
 
-    public EtapeResp(Integer id, String nomEtape, String ville, String pays, Integer dureeArret, Enum typeEtape, Integer ordre) {
+    public EtapeResp(Integer id, String nomEtape, String ville, String pays, Integer dureeArret, TypeEtape typeEtape, Integer ordre) {
         this.id = id;
         this.nomEtape = nomEtape;
         this.ville = ville;
@@ -63,11 +64,11 @@ public class EtapeResp {
         this.dureeArret = dureeArret;
     }
 
-    public Enum getTypeEtape() {
+    public TypeEtape getTypeEtape() {
         return typeEtape;
     }
 
-    public void setTypeEtape(Enum typeEtape) {
+    public void setTypeEtape(TypeEtape typeEtape) {
         this.typeEtape = typeEtape;
     }
 

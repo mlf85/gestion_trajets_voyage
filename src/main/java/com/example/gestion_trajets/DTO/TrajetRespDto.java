@@ -1,11 +1,8 @@
 package com.example.gestion_trajets.DTO;
 
 
-import jakarta.validation.constraints.NotEmpty;
+import com.example.gestion_trajets.enums.TypeTransport;
 
-
-
-import java.util.Date;
 
 public class TrajetRespDto {
 
@@ -16,12 +13,13 @@ public class TrajetRespDto {
     private String paysArrivee;
     private Integer duree;
     private double distance;
-    private Enum typeTransport;
+    private TypeTransport typeTransport;
     private String numVol_bus;
     private String nomCompagnie;
     private Integer ordreTrajet;
+    private OffreResp offreResp;
 
-    public TrajetRespDto(Integer idTrajet, String villeDepart, String villeArrivee, String paysDepart, String paysArrivee, Integer duree, double distance, Enum typeTransport, String numVol_bus, String nomCompagnie, Integer ordreTrajet) {
+    public TrajetRespDto(Integer idTrajet, String villeDepart, String villeArrivee, String paysDepart, String paysArrivee, Integer duree, double distance, TypeTransport typeTransport, String numVol_bus, String nomCompagnie, Integer ordreTrajet) {
         this.idTrajet = idTrajet;
         this.villeDepart = villeDepart;
         this.villeArrivee = villeArrivee;
@@ -33,9 +31,26 @@ public class TrajetRespDto {
         this.numVol_bus = numVol_bus;
         this.nomCompagnie = nomCompagnie;
         this.ordreTrajet = ordreTrajet;
+
     }
 
     public TrajetRespDto() {}
+
+    public TrajetRespDto(Integer idTrajet, String villeDepart, String villeArrivee, String paysDepart, String paysArrivee, Integer duree, Double distance, TypeTransport typeTransport, String numVolBus, String nomCompagnie, Integer ordreTrajet, OffreResp offreResp) {
+        this.idTrajet = idTrajet;
+        this.villeDepart = villeDepart;
+        this.villeArrivee = villeArrivee;
+        this.paysDepart = paysDepart;
+        this.paysArrivee = paysArrivee;
+        this.duree = duree;
+        this.distance = distance;
+        this.typeTransport = typeTransport;
+        this.numVol_bus = numVolBus;
+        this.nomCompagnie = nomCompagnie;
+        this.ordreTrajet = ordreTrajet;
+        this.offreResp = offreResp;
+
+    }
 
     public Integer getIdTrajet() {
         return idTrajet;
@@ -93,11 +108,11 @@ public class TrajetRespDto {
         this.distance = distance;
     }
 
-    public Enum getTypeTransport() {
+    public TypeTransport getTypeTransport() {
         return typeTransport;
     }
 
-    public void setTypeTransport(Enum typeTransport) {
+    public void setTypeTransport(TypeTransport typeTransport) {
         this.typeTransport = typeTransport;
     }
 
@@ -123,6 +138,14 @@ public class TrajetRespDto {
 
     public void setOrdreTrajet(Integer ordreTrajet) {
         this.ordreTrajet = ordreTrajet;
+    }
+
+    public OffreResp getOffreResp() {
+        return offreResp;
+    }
+
+    public void setOffreResp(OffreResp offreResp) {
+        this.offreResp = offreResp;
     }
 }
 

@@ -1,6 +1,7 @@
 package com.example.gestion_trajets.controllers;
 
 import com.example.gestion_trajets.DTO.TrajetReq;
+import com.example.gestion_trajets.DTO.TrajetRespDto;
 import jakarta.validation.Valid;
 import com.example.gestion_trajets.entities.Trajet;
 import com.example.gestion_trajets.service.trajet.TrajetService;
@@ -29,19 +30,19 @@ import java.util.List;
             return ResponseEntity.status(200).body(this.trajetService.getTrajets());
         }
 
-        @GetMapping(path = "/get_by_id/{id}")
-        public ResponseEntity<Trajet> getTrajet(@PathVariable Integer id){
-            return ResponseEntity.status(200).body(this.trajetService.getTrajetById(id));
+        @GetMapping("/get_by_id/{idTrajet}")
+        public ResponseEntity<TrajetRespDto> getTrajetById(@PathVariable Integer idTrajet){
+            return ResponseEntity.status(200).body(this.trajetService.getTrajetById(idTrajet));
         }
 
-        @PutMapping(path = "/update/{id}")
+        @PutMapping("/update/{idTrajet}")
         public ResponseEntity<String> updateTrajet(@RequestBody Trajet trajet, @PathVariable Integer idTrajet){
             this.trajetService.updateTrajet(idTrajet, trajet);
             return ResponseEntity.status(202).body("Updated successfully !");
 
         }
 
-        @DeleteMapping(path = "/delete/{id}")
+        @DeleteMapping("/delete/{idTrajet}")
         public ResponseEntity<String> deletedSuccessfully(@PathVariable Integer idTrajet){
             this.trajetService.deleteTrajet(idTrajet);
             return ResponseEntity.status(202).body("Deleted successfully");

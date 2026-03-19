@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface EtapeRepo extends JpaRepository<Etape,Integer> {
-    Optional<Etape> findByName(String nomEtape);
+    Optional<Etape> findByNomEtape(String nomEtape);
 }

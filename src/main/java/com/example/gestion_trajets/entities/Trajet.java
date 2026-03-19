@@ -1,9 +1,9 @@
 package com.example.gestion_trajets.entities;
 
+import com.example.gestion_trajets.enums.StatutTrajet;
+import com.example.gestion_trajets.enums.TypeTransport;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDateTime;
@@ -19,39 +19,36 @@ public class Trajet {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer idTrajet;
-   @NotBlank
     private String villeDepart;
-   @NotBlank
     private String villeArrivee;
-   @NotBlank
     private String paysDepart;
-   @NotBlank
     private String paysArrivee;
-   @NotNull
     private LocalDateTime dateHeureDepart;
-   @NotNull
     private LocalDateTime dateHeureArrivee;
     private Integer duree;
     @Positive
     private Double distance;
-    private Enum typeTransport;
+    @Enumerated(EnumType.STRING)
+    private TypeTransport typeTransport;
     private String numVol_bus;
     private String nomCompagnie;
     private Integer ordreTrajet;
-    private Enum statut;
+    @Enumerated(EnumType.STRING)
+    private StatutTrajet statut;
     private String description;
     @Temporal(TemporalType.DATE)
     private Date dateCreation;
     @Temporal(TemporalType.DATE)
     private Date dateModification;
-    @ManyToOne
-    private Integer offre_id;
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "offre_offre_id", nullable = true)
+    private Offre offre;
     @OneToMany(mappedBy = "trajet")
     @JsonIgnore
     private List<Etape> etapes= new ArrayList<>();
 
 
-    public Trajet(Integer idTrajet, String villeDepart, String villeArrivee, String paysDepart, String paysArrivee, LocalDateTime dateHeureDepart, LocalDateTime dateHeureArrivee, Integer duree, Double distance, Enum typeTransport, String numVol_bus, String nomCompagnie, Integer ordreTrajet, Enum statut, String description, Date dateCreation, Date dateModification, Integer offre_id, List<Etape> etapes) {
+    public Trajet(Integer idTrajet, String villeDepart, String villeArrivee, String paysDepart, String paysArrivee, LocalDateTime dateHeureDepart, LocalDateTime dateHeureArrivee, Integer duree, Double distance, TypeTransport typeTransport, String numVol_bus, String nomCompagnie, Integer ordreTrajet, StatutTrajet statut, String description, Date dateCreation, Date dateModification, Offre offre, List<Etape> etapes) {
         this.idTrajet = idTrajet;
         this.villeDepart = villeDepart;
         this.villeArrivee = villeArrivee;
@@ -69,11 +66,20 @@ public class Trajet {
         this.description = description;
         this.dateCreation = dateCreation;
         this.dateModification = dateModification;
-        this.offre_id = offre_id;
+        this.offre = offre;
         this.etapes = etapes;
     }
 
     public Trajet() {}
+
+    public Trajet(String villeDepart, String villeArrivee, String paysDepart, String paysArrivee, Integer duree, double distance) {
+        this.villeDepart = villeDepart;
+        this.villeArrivee = villeArrivee;
+        this.paysDepart = paysDepart;
+        this.paysArrivee = paysArrivee;
+        this.duree = duree;
+        this.distance = distance;
+    }
 
 
     public Integer getIdTrajet() {
@@ -148,11 +154,11 @@ public class Trajet {
         this.distance = distance;
     }
 
-    public Enum getTypeTransport() {
+    public TypeTransport getTypeTransport() {
         return typeTransport;
     }
 
-    public void setTypeTransport(Enum typeTransport) {
+    public void setTypeTransport(TypeTransport typeTransport) {
         this.typeTransport = typeTransport;
     }
 
@@ -180,11 +186,11 @@ public class Trajet {
         this.ordreTrajet = ordreTrajet;
     }
 
-    public Enum getStatut() {
+    public StatutTrajet getStatut() {
         return statut;
     }
 
-    public void setStatut(Enum statut) {
+    public void setStatut(StatutTrajet statut) {
         this.statut = statut;
     }
 
@@ -212,12 +218,12 @@ public class Trajet {
         this.dateModification = dateModification;
     }
 
-    public Integer getOffre_id() {
-        return offre_id;
+    public Offre getOffre() {
+        return offre;
     }
 
-    public void setOffre_id(Integer offre_id) {
-        this.offre_id = offre_id;
+    public void setOffre(Offre offre) {
+        this.offre = offre;
     }
 
     public List<Etape> getEtapes() {

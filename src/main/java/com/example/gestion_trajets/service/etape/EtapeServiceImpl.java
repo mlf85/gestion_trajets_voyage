@@ -24,7 +24,6 @@ public class EtapeServiceImpl implements EtapeService {
         etape.setId(null);
         etape.setDateCreation(new Date());
         etape.setDateModification(new Date());
-        etapeRepo.save(etape);
         this.etapeRepo.save(etape);
     }
 
@@ -47,18 +46,21 @@ public class EtapeServiceImpl implements EtapeService {
                 () ->new ResourceNotFoundException("Le trajet n'existe pas !")
         );
 
+        etapeToUpdate.setNomEtape(etape.getNomEtape());
+        etapeToUpdate.setDescription(etape.getDescription());
+        etapeToUpdate.setDureeArret(etape.getDureeArret());
         etapeToUpdate.setDateModification(new Date());
         this.etapeRepo.saveAndFlush(etapeToUpdate);
     }
 
     @Override
     public void deleteEtape(Integer id) {
-
+this.etapeRepo.deleteById(id);
     }
 
     @Override
-    public @Nullable Etape getEtapeByName(String nomEtape) {
-        return this.etapeRepo.findByName(nomEtape).orElseThrow(()->new ResourceNotFoundException("L'etape n'existe pas"));
+    public @Nullable Etape getEtapeByNomEtape(String nomEtape) {
+        return this.etapeRepo.findByNomEtape(nomEtape).orElseThrow(()->new ResourceNotFoundException("L'etape n'existe pas"));
     }
 
 
